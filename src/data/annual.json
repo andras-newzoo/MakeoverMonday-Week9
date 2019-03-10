@@ -1,0 +1,58 @@
+[
+  {
+    "year": 2010,
+    "valueAddedPerBik": 111.2,
+    "%fromAvgPerBike": -0.05,
+    "grossValueAdded": 434955426,
+    "%fromAvgGross": 0.06,
+    "yearlyAvgGross": 409757399
+  },
+  {
+    "year": 2011,
+    "valueAddedPerBik": 128.6,
+    "%fromAvgPerBike": 0.1,
+    "grossValueAdded": 435930074,
+    "%fromAvgGross": 0.06,
+    "yearlyAvgGross": 409757399
+  },
+  {
+    "year": 2012,
+    "valueAddedPerBik": 110.7,
+    "%fromAvgPerBike": -0.05,
+    "grossValueAdded": 392309655,
+    "%fromAvgGross": -0.04,
+    "yearlyAvgGross": 409757399
+  },
+  {
+    "year": 2013,
+    "valueAddedPerBik": 117.6,
+    "%fromAvgPerBike": 0.01,
+    "grossValueAdded": 400852024,
+    "%fromAvgGross": -0.02,
+    "yearlyAvgGross": 409757399
+  },
+  {
+    "year": 2014,
+    "valueAddedPerBik": 110.5,
+    "%fromAvgPerBike": -0.05,
+    "grossValueAdded": 408450409,
+    "%fromAvgGross": 0,
+    "yearlyAvgGross": 409757399
+  },
+  {
+    "year": 2015,
+    "valueAddedPerBik": 114.4,
+    "%fromAvgPerBike": -0.02,
+    "grossValueAdded": 422353280,
+    "%fromAvgGross": 0.03,
+    "yearlyAvgGross": 409757399
+  },
+  {
+    "year": 2016,
+    "valueAddedPerBik": 128.7,
+    "%fromAvgPerBike": 0.1,
+    "grossValueAdded": 373450926,
+    "%fromAvgGross": -0.09,
+    "yearlyAvgGross": 409757399
+  }
+]

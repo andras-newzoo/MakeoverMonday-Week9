@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Grid, Image } from 'semantic-ui-react'
 import ChartHeader from './components/ChartHeader/ChartHeader'
+import quarterly from './data/quarter.json'
+import annual from './data/annual.json'
 
 class App extends Component {
   constructor(props){
@@ -25,7 +26,8 @@ class App extends Component {
     const { width } = this.state,
             height = 350
 
-  console.log(width, height)
+  console.log(quarterly)
+  console.log(annual)
 
 
     return (
