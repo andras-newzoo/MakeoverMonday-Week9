@@ -8,13 +8,13 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-        width: undefined,
+        width: 10000,
     }
   }
 
   componentDidMount = () => {
       window.addEventListener("resize", this.handleResize);
-      setTimeout(() => this.handleResize(), 200);
+      this.handleResize()
   }
 
   handleResize = () => {
@@ -25,9 +25,9 @@ class App extends Component {
 
     const { width } = this.state,
             height = 350
-
-  console.log(quarterly)
-  console.log(annual)
+  //
+  // console.log(quarterly)
+  // console.log(annual)
 
 
     return (
@@ -35,6 +35,9 @@ class App extends Component {
         <div className="ui doubling centered eight column grid">
           <div className="column card" ref={parent => (this.container = parent)}>
               <ChartHeader
+                data = {annual}
+                year = {2015}
+                marginRatio = {0.05}
                 width = {width}
                 height = {height * .45}
                 />

@@ -6,6 +6,10 @@
   color: #333 !important;
 }
 
+text {
+  color: #333;
+}
+
 .card {
   padding: 0 !important;
   border: 1px dotted #333;
