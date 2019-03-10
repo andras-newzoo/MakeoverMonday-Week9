@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
-import {select, selectAll, event as currentEvent} from 'd3-selection'
+import {select, event as currentEvent} from 'd3-selection'
 import { scaleLinear, scaleBand } from 'd3-scale'
 import { transition } from 'd3-transition'
 import { max, min } from 'd3-array'
 import { axisBottom } from 'd3-axis'
 import { format } from 'd3-format'
 import './ChartBody.css'
-import { appendText, appendArea, moveText } from '../functions'
+import { appendText, appendArea } from '../functions'
 
 
 class ChartBody extends Component {

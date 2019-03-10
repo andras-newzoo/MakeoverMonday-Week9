@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {select, selectAll, event as currentEvent} from 'd3-selection'
+import { select } from 'd3-selection'
 import { scaleLinear } from 'd3-scale'
 import { transition } from 'd3-transition'
 import { max } from 'd3-array'
@@ -48,9 +48,7 @@ class ChartHeader extends Component {
           banArea = svg.select('.ban-area'),
           banSubArea = svg.select('.ban-sub-area'),
           chartText = svg.select('.chart-text-area'),
-          barChartArea = svg.select('.bar-chart-area'),
-          barTextOne = svg.select('.bar-chart-text-one'),
-          barTextTwo = svg.select('.bar-chart-text-two')
+          barChartArea = svg.select('.bar-chart-area')
 
     appendText(chartArea, filteredData, 'year-text', 'middle', chartWidth/2, chartHeight*.1, 'data', '', '','year')
     appendText(yearTextArea, filteredData, 'year-sub-text light', 'middle', chartWidth/2, chartHeight*.2, 'text', '', '','Value Added per Bike')
@@ -63,8 +61,6 @@ class ChartHeader extends Component {
     const bar = barChartArea.selectAll('.bar-chart-rect').data(filteredData),
           line = barChartArea.selectAll('.bar-chart-line').data(filteredData),
           text = barChartArea.selectAll('.bar-chart-text').data(filteredData)
-
-    console.log(filteredData)
 
     bar.enter()
         .append('rect')

@@ -1,4 +1,4 @@
-import {select, selectAll, event as currentEvent} from 'd3-selection'
+
 import { format } from 'd3-format'
 
 const appendText = (
