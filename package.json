@@ -2,6 +2,7 @@
   "name": "makeovermonday-week9",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://boringbarchart.com/economic-value-of-the-bicycle-industry",
   "dependencies": {
     "d3-array": "^2.0.3",
     "d3-axis": "^1.0.12",
