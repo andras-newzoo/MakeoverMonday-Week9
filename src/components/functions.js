@@ -34,10 +34,11 @@ appendArea = (
     .attr('transform', `translate(${left}, ${top})`)
 },
 moveText = (
+  area,
   className,
   position
 ) => {
-  select(`.${className}`).attr('x', position)
+  area.select(`.${className}`).attr('x', position)
 }
 
 

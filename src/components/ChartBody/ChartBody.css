@@ -1,0 +1,14 @@
+.light {
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.bar-chart-label {
+  font-weight: 400;
+}
+
+.x-axis text {
+  fill: #333;
+  font-size: 10px;
+  font-weight: 400;
+}

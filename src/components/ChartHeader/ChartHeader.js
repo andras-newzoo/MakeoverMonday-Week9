@@ -3,8 +3,9 @@ import {select, selectAll, event as currentEvent} from 'd3-selection'
 import { scaleLinear } from 'd3-scale'
 import { transition } from 'd3-transition'
 import { max } from 'd3-array'
+import { format } from 'd3-format'
 import './ChartHeader.css'
-import { appendText, appendArea, moveText } from './functionsChartHeader'
+import { appendText, appendArea, moveText } from '../functions'
 
 
 class ChartHeader extends Component {
@@ -22,15 +23,15 @@ class ChartHeader extends Component {
 
   initVis(){
 
-    const   { height, width, data, year, marginRatio, colors } = this.props,
+    const   { height, width, data, year, marginRatio, colors, delay } = this.props,
             { above, below } = colors,
             svg = select(this.node),
             filteredData = data.filter(d => d.year === +year),
             margin = width * marginRatio,
             chartWidth = width - margin*2,
-            chartHeight = height - margin*2
+            chartHeight = height - margin*2,
+            t =1000
 
-    console.log(filteredData)
     svg.attr('height', height).attr('width', width)
 
     appendArea(svg, 'chart-area', margin, margin)
@@ -42,27 +43,28 @@ class ChartHeader extends Component {
     appendArea(svg, 'bar-chart-text-one', margin, margin)
     appendArea(svg, 'bar-chart-text-two', margin, margin)
 
-    const chartArea = select('.chart-area'),
-          yearTextArea = select('.year-text-area'),
-          banArea = select('.ban-area'),
-          banSubArea = select('.ban-sub-area'),
-          chartText = select('.chart-text-area'),
-          barChartArea = select('.bar-chart-area'),
-          barTextOne = select('.bar-chart-text-one'),
-          barTextTwo = select('.bar-chart-text-two')
+    const chartArea = svg.select('.chart-area'),
+          yearTextArea = svg.select('.year-text-area'),
+          banArea = svg.select('.ban-area'),
+          banSubArea = svg.select('.ban-sub-area'),
+          chartText = svg.select('.chart-text-area'),
+          barChartArea = svg.select('.bar-chart-area'),
+          barTextOne = svg.select('.bar-chart-text-one'),
+          barTextTwo = svg.select('.bar-chart-text-two')
 
     appendText(chartArea, filteredData, 'year-text', 'middle', chartWidth/2, chartHeight*.1, 'data', '', '','year')
-    appendText(yearTextArea, filteredData, 'year-sub-text', 'middle', chartWidth/2, chartHeight*.2, 'text', '', '','Value Added per Bike')
+    appendText(yearTextArea, filteredData, 'year-sub-text light', 'middle', chartWidth/2, chartHeight*.2, 'text', '', '','Value Added per Bike')
     appendText(banArea, filteredData, 'ban-text', 'middle', chartWidth/2, chartHeight*.5, 'data', '£', ".2f",'valueAddedPerBik')
-    appendText(banSubArea, filteredData, 'ban-sub-text', 'middle', chartWidth/2, chartHeight*.6, 'data', '', ".1%",'%fromAvgPerBike')
-    appendText(chartText, filteredData, 'chart-text', 'start', 0, chartHeight*.8, 'text', '', '','Gross Value Added')
-    appendText(barTextOne, filteredData, 'bar-text-one', 'start', chartWidth * .01, chartHeight * .975, 'data', '£', '.3s','grossValueAdded')
-    appendText(barTextTwo, filteredData, 'bar-text-two', 'start', chartWidth * .24, chartHeight * .97, 'data', ' | ', '+.1%','%fromAvgGross')
+    appendText(banSubArea, filteredData, 'ban-sub-text light', 'middle', chartWidth/2, chartHeight*.6, 'data', '', "+.1%",'%fromAvgPerBike')
+    appendText(chartText, filteredData, 'chart-text light', 'start', 0, chartHeight*.8, 'text', '', '','Gross Value Added')
 
     this.xScale = scaleLinear().domain([0, max(data, d => d.grossValueAdded)*1.05]).range([0, chartWidth])
 
     const bar = barChartArea.selectAll('.bar-chart-rect').data(filteredData),
-          line = barChartArea.selectAll('.bar-chart-line').data(filteredData)
+          line = barChartArea.selectAll('.bar-chart-line').data(filteredData),
+          text = barChartArea.selectAll('.bar-chart-text').data(filteredData)
+
+    console.log(filteredData)
 
     bar.enter()
         .append('rect')
@@ -71,10 +73,11 @@ class ChartHeader extends Component {
         .attr('y', 3)
         .attr('width', 0)
         .attr('height', chartHeight * .2 - 6)
-        .attr('fill', d => d.grossValueAdded > d.yearlyAvgGross ? above : below)
+        .attr('fill', d  => d.grossValueAdded > d.yearlyAvgGross ? above : below)
           .merge(bar)
           .transition('bar-in')
-          .duration(1000)
+          .delay(delay)
+          .duration(t)
           .attr('width', d => this.xScale(d.grossValueAdded))
 
     line.enter()
@@ -87,8 +90,20 @@ class ChartHeader extends Component {
         .style('stroke', '#333')
         .style('stroke-width', 2)
 
-    select('.bar-text-one').data(filteredData).attr('fill', d => d.grossValueAdded > d.yearlyAvgGross ? '#fff' : '#333')
-    select('.bar-text-two').data(filteredData).attr('fill', d => d.grossValueAdded > d.yearlyAvgGross ? '#fff' : '#333')
+    text.enter()
+        .append('text')
+        .attr('class', 'bar-chart-text')
+        .attr('x', chartWidth * .02)
+        .attr('text-anchor', 'start')
+        .attr('y', chartHeight * .125)
+        .attr('fill',  d  => d.grossValueAdded > d.yearlyAvgGross ? '#fff' : '#333')
+        .attr('opacity', 0)
+        .text( d => format('.3s')(d.grossValueAdded) + ' | ' + format("+.1%")(d['%fromAvgGross']))
+          .merge(text)
+          .transition('text-in')
+          .duration(t)
+          .delay(delay)
+          .attr('opacity', 1)
 
   }
 
@@ -101,20 +116,15 @@ class ChartHeader extends Component {
 
     svg.attr('height', height).attr('width', width)
 
-    moveText('year-text', chartWidth/2)
-    moveText('year-sub-text', chartWidth/2)
-    moveText('ban-text', chartWidth/2)
-    moveText('ban-sub-text', chartWidth/2)
-    moveText('chart-text', 0)
-    moveText('bar-text-one', chartWidth * .01)
-    moveText('bar-text-two', chartWidth * .24)
-
+    moveText(svg, 'year-text', chartWidth/2)
+    moveText(svg, 'year-sub-text', chartWidth/2)
+    moveText(svg, 'ban-text', chartWidth/2)
+    moveText(svg, 'ban-sub-text', chartWidth/2)
 
     this.xScale.range([0, chartWidth])
 
-    select('.bar-chart-rect').attr('width', d => this.xScale(d.grossValueAdded))
-    select('.bar-chart-line').attr('x1', d => this.xScale(d.yearlyAvgGross)).attr('x2', d => this.xScale(d.yearlyAvgGross))
-
+    svg.select('.bar-chart-rect').attr('width', d => this.xScale(d.grossValueAdded))
+    svg.select('.bar-chart-line').attr('x1', d => this.xScale(d.yearlyAvgGross)).attr('x2', d => this.xScale(d.yearlyAvgGross))
 
   }
 
@@ -128,7 +138,7 @@ class ChartHeader extends Component {
 ChartHeader.defaultProps = {
    colors: {
      above: '#3F7B7F',
-     below: '#ACBDBF'
+     below: '#C1CACC'
    }
 }
 

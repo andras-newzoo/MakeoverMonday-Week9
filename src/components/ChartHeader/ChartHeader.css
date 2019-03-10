@@ -3,25 +3,39 @@ text {
   pointer-events: none;
 }
 
+line {
+  cursor: pointer;
+}
+
+rect {
+  cursor: pointer;
+  opacity: .9;
+  transition: .4s opacity;
+}
+
+rect:hover {
+  opacity: 1
+}
+
 .year-text {
   font-size: 20px;
   font-weight: 600;
+  fill: #333;
 }
 
-.year-sub-text,
-.ban-sub-text,
-.chart-text {
+.light {
   font-size: 10px;
   font-weight: 400;
+  fill: #333;
 }
 
 .ban-text {
   font-size: 28px;
   font-weight: 800;
+  fill: #333;
 }
 
-.bar-chart-text-one,
-.bar-chart-text-two {
+.bar-chart-text {
   font-size: 10px;
   font-weight: 600;
 }
