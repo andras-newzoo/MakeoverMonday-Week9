@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/economic-value-of-the-bicycle-industry/precache-manifest.73ad3e336898337f966a0b87f7bbe2f3.js"
+  "/economic-value-of-the-bicycle-industry/precache-manifest.217d34ecaf0ab530ee8ee574b4f67544.js"
 );
 
 workbox.clientsClaim();

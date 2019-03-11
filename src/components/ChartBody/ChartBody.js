@@ -148,7 +148,7 @@ class ChartBody extends Component {
     svg.selectAll('.bar-chart-label')
         .attr('x', d => this.xScale(d.quarter.substring(5)) + this.xScale.bandwidth()/2)
 
-
+    svg.selectAll('.bar-chart-line').attr('x2', chartWidth)
 
   }
 
